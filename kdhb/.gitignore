@@ -10,6 +10,3 @@
 *.ear
 
 # eclipse web project
-/.settings
-*.classpath
-*.project
