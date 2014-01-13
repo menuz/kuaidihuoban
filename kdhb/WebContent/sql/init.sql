@@ -87,4 +87,7 @@ CREATE TABLE `shou_kuaidi_order` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4099 DEFAULT CHARSET=utf8;
 
 
-
+INSERT INTO user(id, username, password, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('1', '1152531', '', '0', '高建辉', '100', '2013', '电子科学与技术', '13012345678', '0', '16楼', '电信大楼415', '0', '0');
+INSERT INTO user(id, username, password, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('2', '1333793', '', '0', '徐小奇', '100', '2013', '电子科学与技术', '13012345678', '1', '16楼', '电信大楼415', '0', '0');
+INSERT INTO user(id, username, password, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('3', '1333902', '', '0', '黄炳川龙', '100', '2013', '电子科学与技术', '13012345678', '1', '16楼', '电信大楼415', '0', '0');
+INSERT INTO user(id, username, password, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('4', '1233690', '', '0', '徐严康', '100', '2012', '电子科学与技术', '13012345678', '1', '16楼', '电信大楼415', '0', '0');
