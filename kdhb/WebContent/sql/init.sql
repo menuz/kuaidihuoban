@@ -39,40 +39,40 @@ CREATE TABLE `user` (
   `accept_task_no` int(11) DEFAULT '0' COMMENT '接受的任务数目',
   
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4099 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
--- Table structure for `fa_kuaidi_order`  派发从快递公司来的快件
+-- Table structure for `shou_kuaidi_order`  对象是同学
 -- ----------------------------
-DROP TABLE IF EXISTS `fa_kuaidi_order`;
-CREATE TABLE `fa_kuaidi_order` (
+DROP TABLE IF EXISTS `shou_kuaidi_order`;
+CREATE TABLE `shou_kuaidi_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `release_user_id` int(11) DEFAULT NULL comment '发布这项任务的用户编号',
   `order_id` varchar(30) DEFAULT NULL comment '订单号',
   `ct` timestamp DEFAULT CURRENT_TIMESTAMP comment '订单生成时间',
   
-  `pack_sign_timeinterval` varchar(20) DEFAULT '' comment '签收时间段', 
-  `pack_company` varchar(20) DEFAULT '' comment '快递公司',
-  `pack_size` varchar(20) DEFAULT '' comment '快递大小',
+  `pack_sign_timeinterval` int(11) comment '签收时间段', 
+  `pack_company` int(11) comment '快递公司',
+  `pack_size` int(11) comment '快递大小',
   
-  `pack_dest` varchar(20) DEFAULT '' comment '快递送到的地方，实验室还是寝室',
+  `pack_dest` int(11) comment '快递送到的地方，实验室还是寝室',
   `pack_money` int(11) DEFAULT '0' comment '包裹的酬金',
-  `pack_to_dest_time` timestamp not null comment '期望包裹到达实验室或者寝室的时间',
-  `order_valid_time` timestamp not null comment '订单有效截止时间',
+  `pack_to_dest_time` varchar(20) not null comment '期望包裹到达实验室或者寝室的时间',
+  `order_valid_time` varchar(20) not null comment '订单有效截止时间',
   
-  `accept_user_id` varchar(10) DEFAULT '' comment '接受这项任务的编号',
+  `accept_user_id` int(11) DEFAULT '-1' comment '接受这项任务的编号用户编号',
   `status` int(11) DEFAULT '0' comment '0，刚刚发布，1，接受，2，成功，3，失败',
   
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4099 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
--- Table structure for `shou_kuaidi_order`  收集快递，从学生那边收集的快递
+-- Table structure for `fa_kuaidi_order`  发快递，对象是同学
 -- ----------------------------
-DROP TABLE IF EXISTS `shou_kuaidi_order`;
-CREATE TABLE `shou_kuaidi_order` (
+DROP TABLE IF EXISTS `fa_kuaidi_order`;
+CREATE TABLE `fa_kuaidi_order` (
 
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` varchar(30) NOT NULL comment '收集订单号',
@@ -84,7 +84,7 @@ CREATE TABLE `shou_kuaidi_order` (
   `book_address` varchar(30) not null comment '预约收集快递地点',
   
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4099 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 INSERT INTO user(id, username, password, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('1', '1152531', '', '0', '高建辉', '100', '2013', '电子科学与技术', '13012345678', '0', '16楼', '电信大楼415', '0', '0');

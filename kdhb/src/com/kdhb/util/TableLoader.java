@@ -9,12 +9,14 @@ package com.kdhb.util;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
+import com.kdhb.model.ShouKuaidiOrder;
 import com.kdhb.model.UserBean;
 
 public class TableLoader {
-	public static UserBean loadUser(java.sql.ResultSet rs)
-			throws SQLException, UnsupportedEncodingException {
+	public static UserBean loadUser(java.sql.ResultSet rs) throws SQLException,
+			UnsupportedEncodingException {
 		int id = rs.getInt("id");
 		String username = rs.getString("username");
 		String password = rs.getString("password");
@@ -35,6 +37,30 @@ public class TableLoader {
 				release_task_no, accept_task_no);
 
 		return user;
+	}
+
+	public static ShouKuaidiOrder loadShouKuaidiOrder(java.sql.ResultSet rs)
+			throws SQLException, UnsupportedEncodingException {
+		int id = rs.getInt("id");
+		int release_user_id = rs.getInt("release_user_id");
+		String order_id = rs.getString("order_id");
+		Timestamp ct = rs.getTimestamp("ct");
+		int pack_sign_timeinterval = rs.getInt("pack_sign_timeinterval");
+		int pack_company = rs.getInt("pack_company");
+		int pack_size = rs.getInt("pack_size");
+		int pack_dest = rs.getInt("pack_dest");
+		int pack_money = rs.getInt("pack_money");
+		String pack_to_dest_time = rs.getString("pack_to_dest_time");
+		String order_valid_time = rs.getString("order_valid_time");
+		int accept_user_id = rs.getInt("accept_user_id");
+		int status = rs.getInt("status");
+
+		ShouKuaidiOrder order = new ShouKuaidiOrder(id, release_user_id,
+				order_id, ct, pack_sign_timeinterval, pack_company, pack_size,
+				pack_dest, pack_money, pack_to_dest_time, order_valid_time,
+				accept_user_id, status);
+
+		return order;
 	}
 
 }

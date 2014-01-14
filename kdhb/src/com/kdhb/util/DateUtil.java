@@ -16,6 +16,7 @@ import java.util.Date;
  */
 public class DateUtil {
 	public static String YMDPattern = "yyyy-MM-dd";
+	public static String HMPattern = "HH:mm";
 	static SimpleDateFormat df_datetime = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss");
 	static SimpleDateFormat df_date = new SimpleDateFormat("yyyy-MM-dd");
