@@ -21,7 +21,7 @@ public class ModifyUserInfoDAO  extends BaseDAO {
 	private DataSource dataSource = null;
 
 	private static final String getUserInfoByUserId = "select * from user where id = ?";
-	private static final String updateUserInfo = "update user set password = ?, name = ?, phone = ?, admit_time = ?, college = ?, major_name = ?, graduate = ?, floor = ?, lab = ?";
+	private static final String updateUserInfo = "update user set password = ?, name = ?, phone = ?, admit_time = ?, college = ?, major_name = ?, graduate = ?, floor = ?, lab = ? where id = ?";
 	
 	public ModifyUserInfoDAO() {
 		try {
@@ -33,7 +33,7 @@ public class ModifyUserInfoDAO  extends BaseDAO {
 		} catch (NamingException e2) {
 		}
 	}
-	
+	//根据id获得该学生的信息
 	public UserBean getUserInfoByUserId(int id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -53,8 +53,8 @@ public class ModifyUserInfoDAO  extends BaseDAO {
 		return null;
 	}
 	
-	
-	public boolean updateUserInfo(String password, String name, String phone, String admit_time, String college, String major_name, int graduate, String floor, String lab) {
+	//更新该学生信息
+	public boolean updateUserInfo(String password, String name, String phone, String admit_time, String college, String major_name, int graduate, String floor, String lab, int id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rst = null;
@@ -71,6 +71,7 @@ public class ModifyUserInfoDAO  extends BaseDAO {
 			pstmt.setInt(7, graduate);
 			pstmt.setString(8, floor);
 			pstmt.setString(9, lab);
+			pstmt.setInt(10, id);
 			
 			int res = pstmt.executeUpdate();
 			if(res > 0)

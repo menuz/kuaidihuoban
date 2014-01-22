@@ -36,12 +36,19 @@ public class ModifyUserInfo extends HttpServlet {
 		request.setCharacterEncoding("utf8");
 		response.setContentType("text/json;charset=utf8");
 		PrintWriter out = response.getWriter();
-
+		/*
+		 * 0表示未登录
+		 * 1表示信息未修改
+		 * 2表示修改失败，包含任何错误
+		 * 3表示修改成功
+		 */
 		int status = 0;
 		if (request.getParameter("userId") != null) {
+			status = 1;
 			try {
+				//获得每个参数，判断是否为空以及是否与之前相同
+				//这里要注意的是对含中文的元素，要进行转换
 				int user_id = Integer.parseInt(request.getParameter("userId"));
-				//String username = request.getParameter("username");
 				String password = request.getParameter("password");
 				String name = request.getParameter("name");
 				String phone = request.getParameter("phone");
@@ -51,38 +58,74 @@ public class ModifyUserInfo extends HttpServlet {
 				int graduate;
 				String floor = request.getParameter("floor");
 				String lab = request.getParameter("lab");
+				//调用dao
 				ModifyUserInfoDAO modifyUserInfoDao = new ModifyUserInfoDAO();
 				UserBean user = modifyUserInfoDao.getUserInfoByUserId(user_id);
-				if (password == null)
+				if (password == null || password.equals(user.getPassword()))
 					password = user.getPassword();
-				if (name == null)
+				else
+					status = 3;
+				if (name == null) {
 					name = user.getName();
-				if (phone == null)
+				} else {
+					name = new String(name.getBytes("ISO-8859-1"), "utf-8");
+					if (!name.equals(user.getName()))
+						status = 3;
+				}
+				if (phone == null || phone.equals(user.getPhone()))
 					phone = user.getPhone();
-				if (admit_time == null)
+				else
+					status = 3;
+				if (admit_time == null || admit_time.equals(user.getAdmit_time()))
 					admit_time = user.getAdmit_time();
-				if (college == null)
+				else {
+					status = 3;
+				}
+				if (college == null || college.equals(user.getCollege()))
 					college = user.getCollege();
+				else 
+					status = 3;
 				if (major_name == null)
 					major_name = user.getMajor_name();
+				else {
+					major_name = new String(major_name.getBytes("ISO-8859-1"), "utf-8");
+					if (!major_name.equals(user.getMajor_name()))
+						status = 3;
+				}
 				if (floor == null)
 					floor = user.getFloor();
+				else {
+					floor = new String(floor.getBytes("ISO-8859-1"), "utf-8");
+					if (!floor.equals(user.getFloor()))
+						status = 3;
+				}
 				if (lab == null)
 					lab = user.getLab();
-				if (request.getParameter("graduate") == null)
+				else {
+					lab = new String(lab.getBytes("ISO-8859-1"), "utf-8");
+					if (!lab.equals(user.getLab()))
+						status = 3;
+				}
+				if (request.getParameter("graduate") == null || Integer.parseInt(request.getParameter("graduate")) == user.getGraduate())
 					graduate = user.getGraduate();
-				else
+				else {
 					graduate = Integer.parseInt(request.getParameter("graduate"));
-				if (modifyUserInfoDao.updateUserInfo(password, name, phone, admit_time, college, major_name, graduate, floor, lab))
 					status = 3;
-				else
+				}
+				//更新
+				if (!modifyUserInfoDao.updateUserInfo(password, name, phone, admit_time, college, major_name, graduate, floor, lab, user_id))
 					status = 2;
+				//test
+//				out.println(floor);
+//				System.out.println(floor);
+//				out.println(user.getName());
+//				System.out.println(user.getName());
 			} catch (Exception e) {
 				e.printStackTrace();
 				status = 2;
 			}
 		}
-
+		//输出结果
 		if (status == 0) {
 			out.println("0");
 			System.out.println("未登陆");
