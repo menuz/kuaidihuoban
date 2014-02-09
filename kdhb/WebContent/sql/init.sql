@@ -75,10 +75,10 @@ DROP TABLE IF EXISTS `fa_kuaidi_order`;
 CREATE TABLE `fa_kuaidi_order` (
 
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL comment '发快递的用户编号',
   `order_id` varchar(30) NOT NULL comment '收集订单号',
   `receiver_name` varchar(20) DEFAULT NULL comment '收件人姓名',
   `receiver_address` varchar(50) DEFAULT NULL comment '收件人地址',
-  `receiver_zipcode` varchar(6) not null comment '收件人邮编',
   
   `book_time` timestamp not null comment '预约时间',  
   `book_address` varchar(30) not null comment '预约收集快递地点',
@@ -91,3 +91,7 @@ INSERT INTO user(id, username, password, tag, name, college, admit_time, major_n
 INSERT INTO user(id, username, password, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('2', '1333793', '', '0', '徐小奇', '100', '2013', '电子科学与技术', '13012345678', '1', '16楼', '电信大楼415', '0', '0');
 INSERT INTO user(id, username, password, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('3', '1333902', '', '0', '黄炳川龙', '100', '2013', '电子科学与技术', '13012345678', '1', '16楼', '电信大楼415', '0', '0');
 INSERT INTO user(id, username, password, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('4', '1233690', '', '0', '徐严康', '100', '2012', '电子科学与技术', '13012345678', '1', '16楼', '电信大楼415', '0', '0');
+
+
+INSERT INTO fa_kuaidi_order(id, user_id, order_id, receiver_name, receiver_address, book_time, book_address) VALUES ('1', '3', '205814062733', '徐小齐', '上海市嘉定区曹安公路4800号', '2014-1-24-12-30', '电信大楼415')
+INSERT INTO fa_kuaidi_order(id, user_id, order_id, receiver_name, receiver_address, book_time, book_address) VALUES ('2', '3', '205814062733', '徐严康', '上海市嘉定区曹安公路4800号', '2014-1-25-11', '电信大楼415')

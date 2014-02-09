@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import com.kdhb.model.FaKuaidiOrder;
 import com.kdhb.model.ShouKuaidiOrder;
 import com.kdhb.model.UserBean;
 
@@ -59,6 +60,21 @@ public class TableLoader {
 				order_id, ct, pack_sign_timeinterval, pack_company, pack_size,
 				pack_dest, pack_money, pack_to_dest_time, order_valid_time,
 				accept_user_id, status);
+
+		return order;
+	}
+	public static FaKuaidiOrder loadFaKuaidiOrder(java.sql.ResultSet rs)
+			throws SQLException, UnsupportedEncodingException {
+		int id = rs.getInt("id");
+		int user_id = rs.getInt("user_id");
+		String order_id = rs.getString("order_id");
+		String receiver_name = rs.getString("receiver_name");
+		String receiver_address = rs.getString("receiver_address");
+		String book_time = rs.getString("book_time");
+		String book_address = rs.getString("book_address");
+
+		FaKuaidiOrder order = new FaKuaidiOrder(id, user_id,
+				order_id, receiver_name, receiver_address, book_time, book_address);
 
 		return order;
 	}
