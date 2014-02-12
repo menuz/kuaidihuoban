@@ -38,7 +38,7 @@ public class CreateShouKuaidi extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		boolean flag = false;
-		
+
 		try {
 			int user_id = Integer.parseInt(request.getParameter("userid"));
 			String username = request.getParameter("username");
@@ -51,14 +51,14 @@ public class CreateShouKuaidi extends HttpServlet {
 			String dest_time = request.getParameter("to_dest_time");
 			// 例如取件时间3:30-4:30，发布一条找人取件的记录，这条记录在一般在3:30之前有效。
 			String order_valid_time = request.getParameter("order_valid_time");
-			
+
 			String order_id = "";
 
 			ShouKuaidiDAO dao = new ShouKuaidiDAO();
 			flag = dao.createShouKuaidiOrder(user_id, order_id,
 					sign_timeinterval, company, size, start, dest, money, dest_time,
 					order_valid_time);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			flag = false;
