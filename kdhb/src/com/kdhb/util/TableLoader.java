@@ -10,6 +10,7 @@ package com.kdhb.util;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import com.kdhb.model.ShouKuaidiOrder;
 import com.kdhb.model.UserBean;
@@ -45,9 +46,13 @@ public class TableLoader {
 		int release_user_id = rs.getInt("release_user_id");
 		String order_id = rs.getString("order_id");
 		Timestamp ct = rs.getTimestamp("ct");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//定义格式，不显示毫秒
+		String _ct = df.format(ct);
+		
 		int pack_sign_timeinterval = rs.getInt("pack_sign_timeinterval");
 		int pack_company = rs.getInt("pack_company");
 		int pack_size = rs.getInt("pack_size");
+		int pack_start = rs.getInt("pack_start");
 		int pack_dest = rs.getInt("pack_dest");
 		int pack_money = rs.getInt("pack_money");
 		String pack_to_dest_time = rs.getString("pack_to_dest_time");
@@ -56,7 +61,7 @@ public class TableLoader {
 		int status = rs.getInt("status");
 
 		ShouKuaidiOrder order = new ShouKuaidiOrder(id, release_user_id,
-				order_id, ct, pack_sign_timeinterval, pack_company, pack_size,
+				order_id, _ct, pack_sign_timeinterval, pack_company, pack_size, pack_start, 
 				pack_dest, pack_money, pack_to_dest_time, order_valid_time,
 				accept_user_id, status);
 

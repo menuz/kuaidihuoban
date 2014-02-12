@@ -1,6 +1,7 @@
 package com.kdhb.servlet.shou;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -33,46 +34,62 @@ public class Debug extends HttpServlet {
 		request.setCharacterEncoding("utf8");
 		response.setContentType("text/json;charset=utf8");
 		
-		HashMap<String, String> debug = new HashMap<String, String>();
-		debug.put("1", "圆通");
-		debug.put("2", "申通");
-		debug.put("3", "国通");
-		debug.put("4", "ems");
-		debug.put("5", "京东");
-		debug.put("6", "天天快递");
+		HashMap<String, String> kuaidi = new HashMap<String, String>();
+		kuaidi.put("1", "圆通");
+		kuaidi.put("2", "申通");
+		kuaidi.put("3", "国通");
+		kuaidi.put("4", "ems");
+		kuaidi.put("5", "京东");
+		kuaidi.put("6", "天天快递");
 		
-		debug.put("100", "11:30~12:30");
-		debug.put("101", "15:00~15:30");
+		HashMap<String, String> timeInterval = new HashMap<String, String>();
+		timeInterval.put("1", "11:30~12:30");
+		timeInterval.put("2", "15:00~15:30");
 		
-		debug.put("200", "电信大楼");
-		debug.put("201", "汽车工程学院");
-		debug.put("202", "机械与材料学院");
-		debug.put("210", "寝室楼1");
-		debug.put("211", "寝室楼2");
-		debug.put("212", "寝室楼3");
-		debug.put("213", "寝室楼4");
-		debug.put("214", "寝室楼5");
-		debug.put("215", "寝室楼6");
-		debug.put("216", "寝室楼7");
-		debug.put("217", "寝室楼8");
-		debug.put("218", "寝室楼9");
-		debug.put("219", "寝室楼10");
-		debug.put("220", "寝室楼11");
-		debug.put("221", "寝室楼12");
-		debug.put("222", "寝室楼13");
-		debug.put("223", "寝室楼14");
-		debug.put("224", "寝室楼15");
-		debug.put("225", "寝室楼16");
-		debug.put("226", "寝室楼17");
-		debug.put("227", "寝室楼18");
-		debug.put("228", "寝室楼19");
-		debug.put("229", "寝室楼20");
+		HashMap<String, String> start = new HashMap<String, String>();
+		start.put("1", "F楼");
+		start.put("2", "邮局");
+		start.put("3", "申通快递店");
 		
-		debug.put("300", "小");
-		debug.put("301", "中");
-		debug.put("302", "大");
+		HashMap<String, String> dest = new HashMap<String, String>();
+		dest.put("1", "电信大楼");
+		dest.put("2", "汽车工程学院");
+		dest.put("3", "机械与材料学院");
+		dest.put("4", "寝室楼1");
+		dest.put("5", "寝室楼2");
+		dest.put("6", "寝室楼3");
+		dest.put("7", "寝室楼4");
+		dest.put("8", "寝室楼5");
+		dest.put("9", "寝室楼6");
+		dest.put("10", "寝室楼7");
+		dest.put("11", "寝室楼8");
+		dest.put("12", "寝室楼9");
+		dest.put("13", "寝室楼10");
+		dest.put("14", "寝室楼11");
+		dest.put("15", "寝室楼12");
+		dest.put("16", "寝室楼13");
+		dest.put("17", "寝室楼14");
+		dest.put("18", "寝室楼15");
+		dest.put("19", "寝室楼16");
+		dest.put("20", "寝室楼17");
+		dest.put("21", "寝室楼18");
+		dest.put("22", "寝室楼19");
+		dest.put("23", "寝室楼20");
 		
-		String userInfo = new Gson().toJson(debug);
+		HashMap<String, String> size = new HashMap<String, String>();
+		size.put("1", "小");
+		size.put("2", "中");
+		size.put("3", "大");
+		
+		
+		ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+		list.add(start);
+		list.add(kuaidi);
+		list.add(timeInterval);
+		list.add(dest);
+		list.add(size);
+		
+		String userInfo = new Gson().toJson(list);
 		response.getWriter().write(userInfo);
 	}
 

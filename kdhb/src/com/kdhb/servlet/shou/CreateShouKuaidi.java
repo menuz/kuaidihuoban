@@ -45,6 +45,7 @@ public class CreateShouKuaidi extends HttpServlet {
 			int sign_timeinterval = Integer.parseInt(request.getParameter("sign_timeinterval"));
 			int company = Integer.parseInt(request.getParameter("company"));
 			int size = Integer.parseInt(request.getParameter("size"));
+			int start = Integer.parseInt(request.getParameter("start"));
 			int dest = Integer.parseInt(request.getParameter("dest"));
 			int money = Integer.parseInt(request.getParameter("money"));
 			String dest_time = request.getParameter("to_dest_time");
@@ -55,7 +56,7 @@ public class CreateShouKuaidi extends HttpServlet {
 
 			ShouKuaidiDAO dao = new ShouKuaidiDAO();
 			flag = dao.createShouKuaidiOrder(user_id, order_id,
-					sign_timeinterval, company, size, dest, money, dest_time,
+					sign_timeinterval, company, size, start, dest, money, dest_time,
 					order_valid_time);
 			
 		} catch (Exception e) {

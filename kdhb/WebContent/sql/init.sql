@@ -55,7 +55,7 @@ CREATE TABLE `shou_kuaidi_order` (
   `pack_sign_timeinterval` int(11) comment '签收时间段', 
   `pack_company` int(11) comment '快递公司',
   `pack_size` int(11) comment '快递大小',
-  
+ 
   `pack_dest` int(11) comment '快递送到的地方，实验室还是寝室',
   `pack_money` int(11) DEFAULT '0' comment '包裹的酬金',
   `pack_to_dest_time` varchar(20) not null comment '期望包裹到达实验室或者寝室的时间',
@@ -66,6 +66,8 @@ CREATE TABLE `shou_kuaidi_order` (
   
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+alter table shou_kuaidi_order add pack_start int(11) not null default '-1';
 
 
 -- ----------------------------

@@ -7,10 +7,11 @@ public class ShouKuaidiOrder {
 	int id;
 	int release_user_id;
 	String order_id;
-	Timestamp ct;
+	String ct;
 	int pack_sign_timeinterval;
 	int pack_company;
 	int pack_size;
+	int pack_start;
 	int pack_dest;
 	int pack_money;
 	String pack_to_dest_time;
@@ -22,22 +23,17 @@ public class ShouKuaidiOrder {
 		
 	}
 
-	@Override
-	public String toString() {
-		return "ShouKuaidiOrder [id=" + id + ", release_user_id="
-				+ release_user_id + ", order_id=" + order_id + ", ct=" + ct
-				+ ", pack_sign_timeinterval=" + pack_sign_timeinterval
-				+ ", pack_company=" + pack_company + ", pack_size=" + pack_size
-				+ ", pack_dest=" + pack_dest + ", pack_money=" + pack_money
-				+ ", pack_to_dest_time=" + pack_to_dest_time
-				+ ", order_valid_time=" + order_valid_time
-				+ ", accept_user_id=" + accept_user_id + ", status=" + status
-				+ "]";
+	public int getPack_start() {
+		return pack_start;
+	}
+
+	public void setPack_start(int pack_start) {
+		this.pack_start = pack_start;
 	}
 
 	public ShouKuaidiOrder(int id, int release_user_id, String order_id,
-			Timestamp ct, int pack_sign_timeinterval, int pack_company,
-			int pack_size, int pack_dest, int pack_money,
+			String ct, int pack_sign_timeinterval, int pack_company,
+			int pack_size, int pack_start, int pack_dest, int pack_money,
 			String pack_to_dest_time, String order_valid_time,
 			int accept_user_id, int status) {
 		super();
@@ -48,6 +44,7 @@ public class ShouKuaidiOrder {
 		this.pack_sign_timeinterval = pack_sign_timeinterval;
 		this.pack_company = pack_company;
 		this.pack_size = pack_size;
+		this.pack_start = pack_start;
 		this.pack_dest = pack_dest;
 		this.pack_money = pack_money;
 		this.pack_to_dest_time = pack_to_dest_time;
@@ -80,11 +77,11 @@ public class ShouKuaidiOrder {
 		this.order_id = order_id;
 	}
 
-	public Timestamp getCt() {
+	public String getCt() {
 		return ct;
 	}
 
-	public void setCt(Timestamp ct) {
+	public void setCt(String ct) {
 		this.ct = ct;
 	}
 
@@ -159,7 +156,6 @@ public class ShouKuaidiOrder {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
 	
 }
 
