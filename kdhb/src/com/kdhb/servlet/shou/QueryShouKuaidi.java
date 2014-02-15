@@ -35,45 +35,36 @@ public class QueryShouKuaidi extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 取当天所有订单，然后根据时间段，快递公司，目的地进行筛选
-		
 		String date = DateUtil.getDatetimeWithPattern(DateUtil.YMDPattern);
 		String time = DateUtil.getDatetimeWithPattern(DateUtil.HMPattern);
 		int timeinterval = Integer.parseInt(request.getParameter("timeinterval"));
 		int company = Integer.parseInt(request.getParameter("company"));
 		int dest = Integer.parseInt(request.getParameter("dest"));
-		
-//		String time = "09:00";
+		int userid = Integer.parseInt(request.getParameter("userid"));
 
-		String sql = "select * from shou_kuaidi_order where date(ct) = curdate() and '" + time + "' <  order_valid_time";
+		String sql = "select * from shou_kuaidi_order as sko, user as u where sko.release_user_id = u.id and date(ct) = curdate() and '" + time + "' <  order_valid_time and status = 0";
+
 		String suffix = "";
-		
 		if(timeinterval != -1) {
-			suffix += (" timeinterval = " + timeinterval);
+			suffix += (" and timeinterval = " + timeinterval);
 		}
 		if(company != -1) {
-			
-			if(suffix.trim().equals("")) {
-				suffix += (" pack_company = " + company);
-			} else {
 				suffix += (" and pack_company = " + company);
-			}
 		}
 		if(dest != -1) {
-			
-			if(suffix.trim().equals("")) {
-				suffix += (" pack_dest = " + dest);
-			} else {
 				suffix += (" and pack_dest = " + dest);
-			}
 		}
 		
-		if(!suffix.trim().equals("")) {
-			sql += (" and " + suffix);
-		}
+		suffix += (" and release_user_id != " + userid);
+		sql += suffix;
+		
+		System.out.println("sql = " + sql);
 		
 		ShouKuaidiDAO dao = new ShouKuaidiDAO();
 		List<ShouKuaidiOrder> orders = dao.getShouKuaiOrder(sql);
 		
+		response.setContentType("text/html; charset=utf-8");  
+		response.setCharacterEncoding("utf8"); 
 		PrintWriter pw = response.getWriter();
 		if(orders.size() == 0) {
 			pw.write("0");
@@ -83,7 +74,6 @@ public class QueryShouKuaidi extends HttpServlet {
 			pw.write(orderInfo);
 			System.out.println("找出符合");
 		}
-		
 	}
 
 	/**

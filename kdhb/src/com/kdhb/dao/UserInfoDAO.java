@@ -15,15 +15,16 @@ import com.kdhb.util.Global;
 import com.kdhb.util.TableLoader;
 import com.kdhb.model.UserBean;
 
-public class ModifyUserInfoDAO  extends BaseDAO {
+public class UserInfoDAO  extends BaseDAO {
 
 	private static InitialContext context = null;
 	private DataSource dataSource = null;
 
 	private static final String getUserInfoByUserId = "select * from user where id = ?";
 	private static final String updateUserInfo = "update user set password = ?, name = ?, phone = ?, admit_time = ?, college = ?, major_name = ?, graduate = ?, floor = ?, lab = ? where id = ?";
+	private static final String getUser="select * from user where id = ? and tag='1'";
 	
-	public ModifyUserInfoDAO() {
+	public UserInfoDAO() {
 		try {
 			if (context == null) {
 				context = new InitialContext();
@@ -82,6 +83,32 @@ public class ModifyUserInfoDAO  extends BaseDAO {
 			releaseSource(conn, pstmt, rst);
 		}
 		return false;
+	}
+	
+	public UserBean getUserById(String userId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rst = null;
+		boolean b=false;
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(getUser);
+
+			pstmt.setString(1, userId);
+			rst = pstmt.executeQuery();
+
+			if(rst.next()){
+				return TableLoader.loadUser(rst);
+			} 
+			
+		} catch (Exception se) {
+			se.printStackTrace();
+		} finally {
+			releaseSource(conn, pstmt, rst);
+		}
+		
+		return null;
+
 	}
 	
 }

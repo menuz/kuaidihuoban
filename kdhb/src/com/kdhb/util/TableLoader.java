@@ -22,6 +22,7 @@ public class TableLoader {
 		int id = rs.getInt("id");
 		String username = rs.getString("username");
 		String password = rs.getString("password");
+		int sex = rs.getInt("sex");
 		String name = rs.getString("name");
 		String phone = rs.getString("phone");
 		String admit_time = rs.getString("admit_time");
@@ -34,7 +35,7 @@ public class TableLoader {
 		int release_task_no = rs.getInt("release_task_no");
 		int accept_task_no = rs.getInt("accept_task_no");
 
-		UserBean user = new UserBean(id, username, password, name, phone,
+		UserBean user = new UserBean(id, username, password, sex, name, phone,
 				admit_time, college, major_name, graduate, floor, lab, tag,
 				release_task_no, accept_task_no);
 
@@ -42,6 +43,64 @@ public class TableLoader {
 	}
 
 	public static ShouKuaidiOrder loadShouKuaidiOrder(java.sql.ResultSet rs)
+			throws SQLException, UnsupportedEncodingException {
+		int id = rs.getInt("id");
+		int release_user_id = rs.getInt("release_user_id");
+		String release_user_name = rs.getString("name");
+		String order_id = rs.getString("order_id");
+		Timestamp ct = rs.getTimestamp("ct");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//定义格式，不显示毫秒
+		String _ct = df.format(ct);
+		
+		int pack_sign_timeinterval = rs.getInt("pack_sign_timeinterval");
+		int pack_company = rs.getInt("pack_company");
+		int pack_size = rs.getInt("pack_size");
+		int pack_start = rs.getInt("pack_start");
+		int pack_dest = rs.getInt("pack_dest");
+		int pack_money = rs.getInt("pack_money");
+		String pack_to_dest_time = rs.getString("pack_to_dest_time");
+		String order_valid_time = rs.getString("order_valid_time");
+		int accept_user_id = rs.getInt("accept_user_id");
+		int status = rs.getInt("status");
+
+		ShouKuaidiOrder order = new ShouKuaidiOrder(id, release_user_id, release_user_name,
+				order_id, _ct, pack_sign_timeinterval, pack_company, pack_size, pack_start, 
+				pack_dest, pack_money, pack_to_dest_time, order_valid_time,
+				accept_user_id, status);
+
+		return order;
+	}
+	
+	public static ShouKuaidiOrder loadReleaseShouKuaidiOrder(java.sql.ResultSet rs)
+			throws SQLException, UnsupportedEncodingException {
+		int id = rs.getInt("id");
+		int release_user_id = rs.getInt("release_user_id");
+		String order_id = rs.getString("order_id");
+		Timestamp ct = rs.getTimestamp("ct");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//定义格式，不显示毫秒
+		String _ct = df.format(ct);
+		
+		int pack_sign_timeinterval = rs.getInt("pack_sign_timeinterval");
+		int pack_company = rs.getInt("pack_company");
+		int pack_size = rs.getInt("pack_size");
+		int pack_start = rs.getInt("pack_start");
+		int pack_dest = rs.getInt("pack_dest");
+		int pack_money = rs.getInt("pack_money");
+		String pack_to_dest_time = rs.getString("pack_to_dest_time");
+		String order_valid_time = rs.getString("order_valid_time");
+		int accept_user_id = rs.getInt("accept_user_id");
+		String accept_user_name = rs.getString("name");
+		int status = rs.getInt("status");
+
+		ShouKuaidiOrder order = new ShouKuaidiOrder(id, release_user_id,
+				order_id, _ct, pack_sign_timeinterval, pack_company, pack_size, pack_start, 
+				pack_dest, pack_money, pack_to_dest_time, order_valid_time,
+				accept_user_id, accept_user_name, status);
+
+		return order;
+	}
+	
+	public static ShouKuaidiOrder loadShouKuaidiOrder3(java.sql.ResultSet rs)
 			throws SQLException, UnsupportedEncodingException {
 		int id = rs.getInt("id");
 		int release_user_id = rs.getInt("release_user_id");
@@ -68,6 +127,8 @@ public class TableLoader {
 
 		return order;
 	}
+	
+	
 	public static FaKuaidiOrder loadFaKuaidiOrder(java.sql.ResultSet rs)
 			throws SQLException, UnsupportedEncodingException {
 		int id = rs.getInt("id");

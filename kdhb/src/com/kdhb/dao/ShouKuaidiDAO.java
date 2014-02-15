@@ -29,8 +29,8 @@ public class ShouKuaidiDAO extends BaseDAO {
 			"ct, pack_sign_timeinterval, pack_company, pack_size, pack_start, pack_dest, pack_money, pack_to_dest_time, order_valid_time," +
 			"status) values (null, ?, ?, null, ?, ?, ?, ?,?, ?,?,?,0)";
 	
-	private static final String queryReleaseOrder = "select * from shou_kuaidi_order where release_user_id = ? order by ct desc";
-	private static final String queryAcceptOrder = "select * from shou_kuaidi_order where accept_user_id = ? order by ct desc";
+	private static final String queryReleaseOrder = "select * from shou_kuaidi_order as sko, user as u where sko.accept_user_id = u.id and release_user_id = ? order by ct desc";
+	private static final String queryAcceptOrder = "select * from shou_kuaidi_order as sko, user as u where sko.release_user_id = u.id and accept_user_id = ? order by ct desc";
 	private static final String acceptOrder = "update shou_kuaidi_order set accept_user_id = ? , status = ? where id = ? and release_user_id = ?";
 	private static final String finishOrder = "update shou_kuaidi_order set status = ? where id = ? and release_user_id = ? and accept_user_id = ?";
 	private static final String existUser = "select * from user where id = ?";
@@ -151,7 +151,7 @@ public class ShouKuaidiDAO extends BaseDAO {
 			
 			rst = pstmt.executeQuery();
 			while(rst.next()) {
-				ShouKuaidiOrder order = TableLoader.loadShouKuaidiOrder(rst);
+				ShouKuaidiOrder order = TableLoader.loadReleaseShouKuaidiOrder(rst);
 				orders.add(order);
 			}
 			

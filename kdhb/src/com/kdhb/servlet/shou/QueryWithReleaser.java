@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.kdhb.dao.ShouKuaidiDAO;
 import com.kdhb.model.ShouKuaidiOrder;
-import com.kdhb.util.DateUtil;
 
 /**
  * Servlet implementation class QueryWithReleaser
@@ -36,13 +35,14 @@ public class QueryWithReleaser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
 		String release_user_id = request.getParameter("userid");
 
 		System.out.println("release_user_id = " + release_user_id);
 		
 		ShouKuaidiDAO dao = new ShouKuaidiDAO();
 
+		response.setContentType("text/html; charset=utf-8");  
+		response.setCharacterEncoding("utf8"); 
 		PrintWriter pw = response.getWriter();
 		if (dao.existUser(release_user_id.trim())) {
 			List<ShouKuaidiOrder> orders = dao

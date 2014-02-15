@@ -21,6 +21,7 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) DEFAULT NULL comment '用户名即学生学号',
   `password` varchar(30) DEFAULT NULL comment '密码',
+  `sex` int DEFAULT NULL comment '性别 0 男 1 女',
   
   `name` varchar(20) DEFAULT NULL comment '姓名',
   `phone` varchar(20) DEFAULT NULL comment '手机',
@@ -35,6 +36,7 @@ CREATE TABLE `user` (
   
   `tag` int(11) DEFAULT '0' COMMENT '有没有激活，1激活，0未激活',
   
+  `score` int(11) DEFAULT '10' COMMENT '用户积分 0215',
   `release_task_no` int(11) DEFAULT '0' COMMENT '发布的任务数目',
   `accept_task_no` int(11) DEFAULT '0' COMMENT '接受的任务数目',
   
@@ -61,6 +63,7 @@ CREATE TABLE `shou_kuaidi_order` (
   `pack_to_dest_time` varchar(20) not null comment '期望包裹到达实验室或者寝室的时间',
   `order_valid_time` varchar(20) not null comment '订单有效截止时间',
   
+  `score` int(11) DEFAULT '1' COMMENT '用户积分 0215',
   `accept_user_id` int(11) DEFAULT '-1' comment '接受这项任务的编号用户编号',
   `status` int(11) DEFAULT '0' comment '0，刚刚发布，1，接受，2，成功，3，失败',
   
@@ -75,7 +78,6 @@ alter table shou_kuaidi_order add pack_start int(11) not null default '-1';
 -- ----------------------------
 DROP TABLE IF EXISTS `fa_kuaidi_order`;
 CREATE TABLE `fa_kuaidi_order` (
-
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL comment '发快递的用户编号',
   `order_id` varchar(30) NOT NULL comment '收集订单号',
@@ -88,12 +90,11 @@ CREATE TABLE `fa_kuaidi_order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+INSERT INTO user(id, username, password, sex, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('-1', '1152531', '123', 0, '1', '好心人', '100', '2013', '电子科学与技术', '13012345678', '0', '16楼', '电信大楼415', '0', '0');
+INSERT INTO user(id, username, password, sex, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('1', '1152531', '123', 0, '1', '高建辉', '100', '2013', '电子科学与技术', '13012345678', '0', '16楼', '电信大楼415', '0', '0');
+INSERT INTO user(id, username, password, sex, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('2', '1333793', '123', 0, '1', '徐小奇', '100', '2013', '电子科学与技术', '13012345678', '1', '16楼', '电信大楼415', '0', '0');
+INSERT INTO user(id, username, password, sex, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('3', '1333902', '123', 0, '1', '黄炳川龙', '100', '2013', '电子科学与技术', '13012345678', '1', '16楼', '电信大楼415', '0', '0');
+INSERT INTO user(id, username, password, sex, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('4', '1233690', '123', 0, '1', '徐严康', '100', '2012', '电子科学与技术', '13012345678', '1', '16楼', '电信大楼415', '0', '0');
 
-INSERT INTO user(id, username, password, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('1', '1152531', '', '0', '高建辉', '100', '2013', '电子科学与技术', '13012345678', '0', '16楼', '电信大楼415', '0', '0');
-INSERT INTO user(id, username, password, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('2', '1333793', '', '0', '徐小奇', '100', '2013', '电子科学与技术', '13012345678', '1', '16楼', '电信大楼415', '0', '0');
-INSERT INTO user(id, username, password, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('3', '1333902', '', '0', '黄炳川龙', '100', '2013', '电子科学与技术', '13012345678', '1', '16楼', '电信大楼415', '0', '0');
-INSERT INTO user(id, username, password, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('4', '1233690', '', '0', '徐严康', '100', '2012', '电子科学与技术', '13012345678', '1', '16楼', '电信大楼415', '0', '0');
-
-
-INSERT INTO fa_kuaidi_order(id, user_id, order_id, receiver_name, receiver_address, book_time, book_address) VALUES ('1', '3', '205814062733', '徐小齐', '上海市嘉定区曹安公路4800号', '2014-1-24-12-30', '电信大楼415')
-INSERT INTO fa_kuaidi_order(id, user_id, order_id, receiver_name, receiver_address, book_time, book_address) VALUES ('2', '3', '205814062733', '徐严康', '上海市嘉定区曹安公路4800号', '2014-1-25-11', '电信大楼415')
+INSERT INTO fa_kuaidi_order(id, user_id, order_id, receiver_name, receiver_address, book_time, book_address) VALUES ('1', '3', '205814062733', '徐小齐', '上海市嘉定区曹安公路4800号', '2014-1-24-12-30', '电信大楼415');
+INSERT INTO fa_kuaidi_order(id, user_id, order_id, receiver_name, receiver_address, book_time, book_address) VALUES ('2', '3', '205814062733', '徐严康', '上海市嘉定区曹安公路4800号', '2014-1-25-11', '电信大楼415');

@@ -1,8 +1,7 @@
-package com.kdhb.servlet.shou;
+package com.kdhb.servlet.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.kdhb.dao.ShouKuaidiDAO;
-import com.kdhb.model.ShouKuaidiOrder;
+import com.kdhb.dao.UserInfoDAO;
+import com.kdhb.model.UserBean;
 
 /**
- * Servlet implementation class QueryWithAccepter
+ * Servlet implementation class GetUserInfo
  */
-@WebServlet("/QueryWithAccepter")
-public class QueryWithAccepter extends HttpServlet {
+@WebServlet("/GetUserInfo")
+public class GetUserInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QueryWithAccepter() {
+    public GetUserInfo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,33 +32,24 @@ public class QueryWithAccepter extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf8");
+		response.setContentType("text/json;charset=utf8");
+		PrintWriter out = response.getWriter();
+		String user_id = request.getParameter("userId");
 		
-		String accept_user_id = request.getParameter("userid");
-
-		System.out.println("accept_user_id = " + accept_user_id);
+		UserInfoDAO userDAO = new UserInfoDAO();
+		UserBean user = userDAO.getUserById(user_id);
 		
-		ShouKuaidiDAO dao = new ShouKuaidiDAO();
-
-		response.setContentType("text/html; charset=utf-8");  
-		response.setCharacterEncoding("utf8"); 
-		PrintWriter pw = response.getWriter();
-		if (dao.existUser(accept_user_id.trim())) {
-			List<ShouKuaidiOrder> orders = dao
-					.queryAccepterOrderWithId(accept_user_id);
-			String orderInfo = new Gson().toJson(orders);
-			pw.write(orderInfo);
-			System.out.println("找出accept_user_id="+accept_user_id+"的订单");
-		} else {
-			pw.write("0");
-			System.out.println("該用戶不存在");
-		}
-		
+		String userInfo = new Gson().toJson(user);  
+		out.println(userInfo);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

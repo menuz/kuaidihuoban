@@ -5,6 +5,7 @@ public class UserBean {
 	int id;
 	String username;
 	String password;
+	int sex;
 	String name;
 	String phone;
 	String admit_time;
@@ -20,7 +21,7 @@ public class UserBean {
 	
 	public UserBean() {}
 	
-	public UserBean(int id, String username, String password, String name,
+	public UserBean(int id, String username, String password, int sex,  String name,
 			String phone, String admit_time, String college, String major_name,
 			int graduate, String floor, String lab, int tag,
 			int release_task_no, int accept_task_no) {
@@ -28,6 +29,7 @@ public class UserBean {
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.sex = sex;
 		this.name = name;
 		this.phone = phone;
 		this.admit_time = admit_time;
@@ -41,6 +43,14 @@ public class UserBean {
 		this.accept_task_no = accept_task_no;
 	}
 	
+	public int getSex() {
+		return sex;
+	}
+
+	public void setSex(int sex) {
+		this.sex = sex;
+	}
+
 	@Override
 	public String toString() {
 		return "UserBean [id=" + id + ", username=" + username + ", password="

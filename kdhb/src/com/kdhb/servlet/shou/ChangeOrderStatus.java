@@ -44,7 +44,8 @@ public class ChangeOrderStatus extends HttpServlet {
 		String status = request.getParameter("status");
 		String accept_user_id = request.getParameter("accept_user_id");
 		String release_user_id = request.getParameter("release_user_id");
-		System.out.println("status = " + status);
+		System.out.println("status = " + status + " orderId = " + orderId + " accept_user_id = " + accept_user_id + " release_user_id = " + 
+		release_user_id);
 		
 		int oldstatus = dao.getStatus(orderId);
 		
@@ -67,7 +68,7 @@ public class ChangeOrderStatus extends HttpServlet {
 				int res = dao.finishOrder(orderId, release_user_id, accept_user_id, status);
 				
 				System.out.println("res = " + res);
-				
+				  
 				if (res <= 0) {
 					pw.write("3");
 					System.out.println("完成任务状态失败");

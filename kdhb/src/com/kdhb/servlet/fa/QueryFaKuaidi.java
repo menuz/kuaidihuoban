@@ -57,7 +57,7 @@ public class QueryFaKuaidi extends HttpServlet {
 					System.out.println("没有符合要求的记录");
 				} else {
 					String orderInfo = new Gson().toJson(orders);
-					out.println("1");
+					//out.println("1");
 					out.write(orderInfo);
 					System.out.println("找出符合");
 				}

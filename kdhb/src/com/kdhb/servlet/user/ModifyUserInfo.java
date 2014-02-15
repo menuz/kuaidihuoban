@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kdhb.dao.ModifyUserInfoDAO;
+import com.kdhb.dao.UserInfoDAO;
 import com.kdhb.model.UserBean;
 
 /**
@@ -59,7 +59,7 @@ public class ModifyUserInfo extends HttpServlet {
 				String floor = request.getParameter("floor");
 				String lab = request.getParameter("lab");
 				//调用dao
-				ModifyUserInfoDAO modifyUserInfoDao = new ModifyUserInfoDAO();
+				UserInfoDAO modifyUserInfoDao = new UserInfoDAO();
 				UserBean user = modifyUserInfoDao.getUserInfoByUserId(user_id);
 				if (password == null || password.equals(user.getPassword()))
 					password = user.getPassword();
@@ -116,10 +116,6 @@ public class ModifyUserInfo extends HttpServlet {
 				if (!modifyUserInfoDao.updateUserInfo(password, name, phone, admit_time, college, major_name, graduate, floor, lab, user_id))
 					status = 2;
 				//test
-//				out.println(floor);
-//				System.out.println(floor);
-//				out.println(user.getName());
-//				System.out.println(user.getName());
 			} catch (Exception e) {
 				e.printStackTrace();
 				status = 2;
