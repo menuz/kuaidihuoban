@@ -80,11 +80,35 @@ public class ShouKuaidiOrder {
 		this.status = status;
 	}
 	
+	public ShouKuaidiOrder(int id, int release_user_id, String release_user_name, String order_id,
+			String ct, int pack_sign_timeinterval, int pack_company,
+			int pack_size, int pack_start, int pack_dest, int pack_money,
+			String pack_to_dest_time, String order_valid_time,
+			int accept_user_id, String accept_user_name,  int status) {
+		super();
+		this.id = id;
+		this.release_user_id = release_user_id;
+		this.release_user_name = release_user_name;
+		this.order_id = order_id;
+		this.ct = ct;
+		this.pack_sign_timeinterval = pack_sign_timeinterval;
+		this.pack_company = pack_company;
+		this.pack_size = pack_size;
+		this.pack_start = pack_start;
+		this.pack_dest = pack_dest;
+		this.pack_money = pack_money;
+		this.pack_to_dest_time = pack_to_dest_time;
+		this.order_valid_time = order_valid_time;
+		this.accept_user_id = accept_user_id;
+		this.accept_user_name = accept_user_name;
+		this.status = status;
+	}
+	
 	public ShouKuaidiOrder(int id, int release_user_id, String order_id,
 			String ct, int pack_sign_timeinterval, int pack_company,
 			int pack_size, int pack_start, int pack_dest, int pack_money,
 			String pack_to_dest_time, String order_valid_time,
-			int accept_user_id, int status) {
+			int accept_user_id,  int status) {
 		super();
 		this.id = id;
 		this.release_user_id = release_user_id;

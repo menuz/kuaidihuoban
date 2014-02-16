@@ -22,6 +22,7 @@ public class UserBean {
 	int accept_task_no;
 	//*************2013-2-15 add score***************
 	int score;
+	int money;
 	//***********************************************
 	
 	public UserBean() {}
@@ -46,6 +47,30 @@ public class UserBean {
 		this.tag = tag;
 		this.release_task_no = release_task_no;
 		this.accept_task_no = accept_task_no;
+	}
+	
+	public UserBean(int id, String username, String password, int sex,  String name,
+			String phone, String admit_time, String college, String major_name,
+			int graduate, String floor, String lab, int tag,
+			int release_task_no, int accept_task_no, int score, int money) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.sex = sex;
+		this.name = name;
+		this.phone = phone;
+		this.admit_time = admit_time;
+		this.college = college;
+		this.major_name = major_name;
+		this.graduate = graduate;
+		this.floor = floor;
+		this.lab = lab;
+		this.tag = tag;
+		this.release_task_no = release_task_no;
+		this.accept_task_no = accept_task_no;
+		this.score = score;
+		this.money = money;
 	}
 	
 	public int getSex() {

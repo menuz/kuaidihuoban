@@ -29,8 +29,9 @@ public class ShouKuaidiDAO extends BaseDAO {
 			"ct, pack_sign_timeinterval, pack_company, pack_size, pack_start, pack_dest, pack_money, pack_to_dest_time, order_valid_time," +
 			"status) values (null, ?, ?, null, ?, ?, ?, ?,?, ?,?,?,0)";
 	
-	private static final String queryReleaseOrder = "select * from shou_kuaidi_order as sko, user as u where sko.accept_user_id = u.id and release_user_id = ? order by ct desc";
-	private static final String queryAcceptOrder = "select * from shou_kuaidi_order as sko, user as u where sko.release_user_id = u.id and accept_user_id = ? order by ct desc";
+	//private static final String queryReleaseOrder = "select * from shou_kuaidi_order as sko, user as u where sko.accept_user_id = u.id and release_user_id = ? order by ct desc";
+	private static final String queryReleaseOrder = "select sko.id as id, release_user_id, u1.name as release_user_name, order_id, ct, pack_sign_timeinterval, pack_company, pack_size, pack_start, pack_dest, pack_money, pack_to_dest_time, order_valid_time, accept_user_id, u2.name as accept_user_name, status from shou_kuaidi_order as sko, user as u1, user as u2 where sko.release_user_id = u1.id and sko.accept_user_id = u2.id and release_user_id = ? order by ct desc";
+	private static final String queryAcceptOrder = "select sko.id as id, release_user_id, u1.name as release_user_name, order_id, ct, pack_sign_timeinterval, pack_company, pack_size, pack_start, pack_dest, pack_money, pack_to_dest_time, order_valid_time, accept_user_id, u2.name as accept_user_name, status from shou_kuaidi_order as sko, user as u1, user as u2 where sko.release_user_id = u1.id and sko.accept_user_id = u2.id and accept_user_id = ? order by ct desc";
 	private static final String acceptOrder = "update shou_kuaidi_order set accept_user_id = ? , status = ? where id = ? and release_user_id = ?";
 	private static final String finishOrder = "update shou_kuaidi_order set status = ? where id = ? and release_user_id = ? and accept_user_id = ?";
 	private static final String existUser = "select * from user where id = ?";

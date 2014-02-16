@@ -34,10 +34,12 @@ public class TableLoader {
 		int tag = rs.getInt("tag");
 		int release_task_no = rs.getInt("release_task_no");
 		int accept_task_no = rs.getInt("accept_task_no");
+		int score = rs.getInt("score");
+		int pack_money = score; 
 
 		UserBean user = new UserBean(id, username, password, sex, name, phone,
 				admit_time, college, major_name, graduate, floor, lab, tag,
-				release_task_no, accept_task_no);
+				release_task_no, accept_task_no, score, pack_money);
 
 		return user;
 	}
@@ -46,7 +48,7 @@ public class TableLoader {
 			throws SQLException, UnsupportedEncodingException {
 		int id = rs.getInt("id");
 		int release_user_id = rs.getInt("release_user_id");
-		String release_user_name = rs.getString("name");
+		String release_user_name = rs.getString("release_user_name");
 		String order_id = rs.getString("order_id");
 		Timestamp ct = rs.getTimestamp("ct");
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//定义格式，不显示毫秒
@@ -61,12 +63,13 @@ public class TableLoader {
 		String pack_to_dest_time = rs.getString("pack_to_dest_time");
 		String order_valid_time = rs.getString("order_valid_time");
 		int accept_user_id = rs.getInt("accept_user_id");
+		String accept_user_name = rs.getString("accept_user_name");
 		int status = rs.getInt("status");
-
+  
 		ShouKuaidiOrder order = new ShouKuaidiOrder(id, release_user_id, release_user_name,
 				order_id, _ct, pack_sign_timeinterval, pack_company, pack_size, pack_start, 
 				pack_dest, pack_money, pack_to_dest_time, order_valid_time,
-				accept_user_id, status);
+				accept_user_id, accept_user_name, status);
 
 		return order;
 	}
@@ -75,6 +78,7 @@ public class TableLoader {
 			throws SQLException, UnsupportedEncodingException {
 		int id = rs.getInt("id");
 		int release_user_id = rs.getInt("release_user_id");
+		String release_user_name = rs.getString("release_user_name");
 		String order_id = rs.getString("order_id");
 		Timestamp ct = rs.getTimestamp("ct");
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//定义格式，不显示毫秒
@@ -89,10 +93,10 @@ public class TableLoader {
 		String pack_to_dest_time = rs.getString("pack_to_dest_time");
 		String order_valid_time = rs.getString("order_valid_time");
 		int accept_user_id = rs.getInt("accept_user_id");
-		String accept_user_name = rs.getString("name");
+		String accept_user_name = rs.getString("accept_user_name");
 		int status = rs.getInt("status");
 
-		ShouKuaidiOrder order = new ShouKuaidiOrder(id, release_user_id,
+		ShouKuaidiOrder order = new ShouKuaidiOrder(id, release_user_id, release_user_name,
 				order_id, _ct, pack_sign_timeinterval, pack_company, pack_size, pack_start, 
 				pack_dest, pack_money, pack_to_dest_time, order_valid_time,
 				accept_user_id, accept_user_name, status);

@@ -41,8 +41,17 @@ public class QueryShouKuaidi extends HttpServlet {
 		int company = Integer.parseInt(request.getParameter("company"));
 		int dest = Integer.parseInt(request.getParameter("dest"));
 		int userid = Integer.parseInt(request.getParameter("userid"));
+		
+		int currentTimeInterval = 0;
+		if(time.compareTo("12:30") < 0) {
+			currentTimeInterval = 0;
+		} else if(time.compareTo("16:00") < 0) {
+			currentTimeInterval = 1;
+		} else {
+			currentTimeInterval = 2;
+		}
 
-		String sql = "select * from shou_kuaidi_order as sko, user as u where sko.release_user_id = u.id and date(ct) = curdate() and '" + time + "' <  order_valid_time and status = 0";
+		String sql = "select * from shou_kuaidi_order as sko, user as u where sko.release_user_id = u.id and date(ct) = curdate() and status = 0 and pack_sign_timeinterval > " + currentTimeInterval + " ";
 
 		String suffix = "";
 		if(timeinterval != -1) {

@@ -43,7 +43,6 @@ public class RegisterDAO extends BaseDAO{
 	}
 	
 	public boolean phoneCodeConfirm(String phone, String code) {
-		
 		return true;
 	}
 
