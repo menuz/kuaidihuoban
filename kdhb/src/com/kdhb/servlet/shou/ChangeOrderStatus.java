@@ -2,7 +2,6 @@ package com.kdhb.servlet.shou;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
+import com.kdhb.dao.ScoreDAO;
 import com.kdhb.dao.ShouKuaidiDAO;
-import com.kdhb.model.ShouKuaidiOrder;
 
 /**
  * Servlet implementation class ChangeOrderStatus
@@ -49,6 +47,12 @@ public class ChangeOrderStatus extends HttpServlet {
 		
 		int oldstatus = dao.getStatus(orderId);
 		
+		//*************2013-2-15 add score***************
+		String score = request.getParameter("score");
+		System.out.print("score = " + score);
+		
+		//***********************************************
+		
 		if(dao.existUser(accept_user_id) && dao.existUser(release_user_id) && dao.existOrder(orderId) 
 				&& valid(status, oldstatus)) {
 			
@@ -75,6 +79,11 @@ public class ChangeOrderStatus extends HttpServlet {
 				} else {
 					pw.write("4");
 					System.out.println("完成任务状态成功");
+					//*************2013-2-15 add score***************
+					ScoreDAO scoreDao = new ScoreDAO();
+					scoreDao.scoreCalculate(release_user_id, accept_user_id, score);
+					
+					//***********************************************
 				}
 				
 			} 

@@ -57,20 +57,18 @@ CREATE TABLE `shou_kuaidi_order` (
   `pack_sign_timeinterval` int(11) comment '签收时间段', 
   `pack_company` int(11) comment '快递公司',
   `pack_size` int(11) comment '快递大小',
- 
+  `pack_start` int(11) default '-1' not null comment '快递起始位置',
   `pack_dest` int(11) comment '快递送到的地方，实验室还是寝室',
   `pack_money` int(11) DEFAULT '0' comment '包裹的酬金',
   `pack_to_dest_time` varchar(20) not null comment '期望包裹到达实验室或者寝室的时间',
   `order_valid_time` varchar(20) not null comment '订单有效截止时间',
   
-  `score` int(11) DEFAULT '1' COMMENT '用户积分 0215',
   `accept_user_id` int(11) DEFAULT '-1' comment '接受这项任务的编号用户编号',
   `status` int(11) DEFAULT '0' comment '0，刚刚发布，1，接受，2，成功，3，失败',
   
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-alter table shou_kuaidi_order add pack_start int(11) not null default '-1';
 
 
 -- ----------------------------
@@ -88,7 +86,7 @@ CREATE TABLE `fa_kuaidi_order` (
   `book_address` varchar(30) not null comment '预约收集快递地点',
   
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSEshowT=utf8;
 
 INSERT INTO user(id, username, password, sex, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('-1', '1152531', '123', 0, '1', '好心人', '100', '2013', '电子科学与技术', '13012345678', '0', '16楼', '电信大楼415', '0', '0');
 INSERT INTO user(id, username, password, sex, tag, name, college, admit_time, major_name, phone, graduate, floor, lab, release_task_no, accept_task_no) VALUES ('1', '1152531', '123', 0, '1', '高建辉', '100', '2013', '电子科学与技术', '13012345678', '0', '16楼', '电信大楼415', '0', '0');
@@ -98,3 +96,6 @@ INSERT INTO user(id, username, password, sex, tag, name, college, admit_time, ma
 
 INSERT INTO fa_kuaidi_order(id, user_id, order_id, receiver_name, receiver_address, book_time, book_address) VALUES ('1', '3', '205814062733', '徐小齐', '上海市嘉定区曹安公路4800号', '2014-1-24-12-30', '电信大楼415');
 INSERT INTO fa_kuaidi_order(id, user_id, order_id, receiver_name, receiver_address, book_time, book_address) VALUES ('2', '3', '205814062733', '徐严康', '上海市嘉定区曹安公路4800号', '2014-1-25-11', '电信大楼415');
+
+INSERT INTO shou_kuaidi_order(id, release_user_id, order_id, ct, pack_sign_timeinterval, pack_company, pack_size, pack_start, pack_dest, pack_money, pack_to_dest_time, order_valid_time, accept_user_id, status) VALUES ('1', '3', '205814062733', '2014-1-25-11', '2', '1', '1', '1', '1', '2', '2014-1-26-15', '2014-1-26-17', '2', '1');
+

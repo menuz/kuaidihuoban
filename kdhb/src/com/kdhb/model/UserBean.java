@@ -1,5 +1,7 @@
 package com.kdhb.model;
 
+import com.kdhb.dao.ScoreDAO;
+
 public class UserBean {
 
 	int id;
@@ -18,6 +20,9 @@ public class UserBean {
 	
 	int release_task_no;
 	int accept_task_no;
+	//*************2013-2-15 add score***************
+	int score;
+	//***********************************************
 	
 	public UserBean() {}
 	
@@ -59,7 +64,7 @@ public class UserBean {
 				+ ", major_name=" + major_name + ", graduate=" + graduate
 				+ ", floor=" + floor + ", lab=" + lab + ", tag=" + tag
 				+ ", release_task_no=" + release_task_no + ", accept_task_no="
-				+ accept_task_no + "]";
+				+ accept_task_no + ", score=" + score + "]";
 	}
 	public int getId() {
 		return id;
@@ -144,6 +149,14 @@ public class UserBean {
 	}
 	public void setAccept_task_no(int accept_task_no) {
 		this.accept_task_no = accept_task_no;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 	
 	
