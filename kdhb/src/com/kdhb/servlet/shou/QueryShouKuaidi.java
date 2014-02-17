@@ -51,11 +51,11 @@ public class QueryShouKuaidi extends HttpServlet {
 			currentTimeInterval = 2;
 		}
 
-		String sql = "select * from shou_kuaidi_order as sko, user as u where sko.release_user_id = u.id and date(ct) = curdate() and status = 0 and pack_sign_timeinterval > " + currentTimeInterval + " ";
+		String sql = "select sko.id as id, release_user_id, u1.name as release_user_name, order_id, ct, pack_sign_timeinterval, pack_company, pack_size, pack_start, pack_dest, pack_money, pack_to_dest_time, order_valid_time, accept_user_id, u2.name as accept_user_name, status from shou_kuaidi_order as sko, user as u1, user as u2 where sko.release_user_id = u1.id and sko.accept_user_id = u2.id and date(ct) = curdate() and status = 0 and pack_sign_timeinterval > " + currentTimeInterval + " ";
 
 		String suffix = "";
 		if(timeinterval != -1) {
-			suffix += (" and timeinterval = " + timeinterval);
+			suffix += (" and pack_sign_timeinterval = " + timeinterval);
 		}
 		if(company != -1) {
 				suffix += (" and pack_company = " + company);
@@ -65,6 +65,7 @@ public class QueryShouKuaidi extends HttpServlet {
 		}
 		
 		suffix += (" and release_user_id != " + userid);
+		suffix += " order by ct desc";
 		sql += suffix;
 		
 		System.out.println("sql = " + sql);
