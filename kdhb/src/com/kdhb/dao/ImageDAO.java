@@ -82,8 +82,6 @@ public class ImageDAO extends BaseDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rst = null;
 		boolean written = false;
-		// ResultSet
-		// rs=stmt.executeQuery("select * from image_tab where image_name='"+baseName+"'");
 
 		conn = dataSource.getConnection();
 		PreparedStatement ps = conn.prepareStatement(getImage);
@@ -94,17 +92,6 @@ public class ImageDAO extends BaseDAO {
 			System.out.println("Image not found");
 			return null;
 		}
-		// // int len = rs.getInt(1);
-		//
-		// // byte[] b = new byte[len];
-		// byte[] b = new byte[1024];
-		// InputStream in = rs.getBinaryStream(1);
-		// int n = in.read(b);
-		// System.out.println("n: " + n);
-		// in.close();
-		// Image img = Toolkit.getDefaultToolkit().createImage(b);
-		// // System.out.println("Image: retrieved ok, size: " + len);
-		// return img;
 		Blob blob = (Blob) rs.getBlob("image");
 		BufferedInputStream inputImage = new BufferedInputStream(blob.getBinaryStream());
 		BufferedImage image = null;
